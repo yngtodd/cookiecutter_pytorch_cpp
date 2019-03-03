@@ -4,7 +4,7 @@
 #
 # Project Properties
 #
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project ({{ cookiecutter.repo_name }})
 set (APPLICATION_NAME "{{ cookiecutter.project_name }}")
 set (APPLICATION_CODENAME "${PROJECT_NAME}")
@@ -19,6 +19,13 @@ set (APPLICATION_VERSION_STRING "${APPLICATION_VERSION_MAJOR}.${APPLICATION_VERS
 #set (APPLICATION_VENDOR_URL "yourcompany.com")
 #set (APPLICATION_ID "${APPLICATION_VENDOR_ID}.${PROJECT_NAME}")
 
+#
+# Requirements
+#
+find_package(Torch REQUIRED)
+target_link_libraries({{ cookiecutter.project_name }} "${TORCH_LIBRARIES}")
+set_property(TARGET {{ cookiecutter.project_name }} PROPERTY CXX_STANDARD 11)
+
 
 #
 # Debugging Options
@@ -32,7 +39,7 @@ set (CMAKE_VERBOSE_MAKEFILE 0) # Use 1 for debugging, 0 for release
 set (MAINFOLDER ${PROJECT_SOURCE_DIR})
 set (EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/bin")
 set (LIBRARY_OUTPUT_PATH "${MAINFOLDER}/lib")
-set (CATCH_DIR "${MAINFOLDER}/thirdparty/catch")
+set (CATCH_DIR "${MAINFOLDER}/external/catch")
 
 
 #
