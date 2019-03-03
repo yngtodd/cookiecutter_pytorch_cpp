@@ -1,4 +1,4 @@
-#include "Calculator.hpp"
+#include "calculator.hpp"
 
 namespace {{ cookiecutter.repo_name }} {
 

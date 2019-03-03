@@ -4,7 +4,7 @@
 #
 # Project Properties
 #
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project ({{ cookiecutter.repo_name }})
 set (APPLICATION_NAME "{{ cookiecutter.project_name }}")
 set (APPLICATION_CODENAME "${PROJECT_NAME}")
@@ -14,17 +14,11 @@ set (APPLICATION_VERSION_MINOR 1)
 set (APPLICATION_VERSION_PATCH 0)
 set (APPLICATION_VERSION_TYPE SNAPSHOT)
 set (APPLICATION_VERSION_STRING "${APPLICATION_VERSION_MAJOR}.${APPLICATION_VERSION_MINOR}.${APPLICATION_VERSION_PATCH}-${APPLICATION_VERSION_TYPE}")
-#set (APPLICATION_VENDOR_ID "com.yourcompany")
-#set (APPLICATION_VENDOR_NAME "Your Company")
-#set (APPLICATION_VENDOR_URL "yourcompany.com")
-#set (APPLICATION_ID "${APPLICATION_VENDOR_ID}.${PROJECT_NAME}")
 
 #
 # Requirements
 #
 find_package(Torch REQUIRED)
-target_link_libraries({{ cookiecutter.project_name }} "${TORCH_LIBRARIES}")
-set_property(TARGET {{ cookiecutter.project_name }} PROPERTY CXX_STANDARD 11)
 
 
 #
@@ -43,19 +37,25 @@ set (CATCH_DIR "${MAINFOLDER}/external/catch")
 
 
 #
-# Project Search Paths
-#
-list (APPEND CMAKE_PREFIX_PATH "${MAINFOLDER}")
-include_directories("${MAINFOLDER}/include")
-
-
-#
 # Add Build Targets
 #
-add_subdirectory(src)
+#add_library({{ cookiecutter.project_name }}_example)
 
-enable_testing()
-add_subdirectory(test)
+file (GLOB productionSources src/*.cpp)
+add_library ({{ cookiecutter.project_name }}_example STATIC ${productionSources})
+target_include_directories ({{ cookiecutter.project_name }}_example PRIVATE ${PROJECT_SOURCE_DIR}/include)
+
+#add_subdirectory(src)
+#add_subdirectory(include)
+
+add_executable(example calculator.cpp main.cpp)
+target_link_libraries(example "${TORCH_LIBRARIES}")
+target_link_libraries(example {{ cookiecutter.project_name }}_example)
+target_include_directories(example PRIVATE ${MAINFOLDER}/include)
+set_property(TARGET example PROPERTY CXX_STANDARD 11)
+
+#enable_testing()
+#add_subdirectory(test)
 
 
 #
