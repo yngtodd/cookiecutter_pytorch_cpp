@@ -1,14 +1,11 @@
-**WARNING: This project is abandoned and no longer going to be maintained by me.**
-**Feel free to fork and update it to your needs.**
+# Cookiecutter_pytorch_cpp 
 
-# BoilerplatePP
-
-This repo is a Cookiecutter template for new C++ Projects.
+This repo is a Cookiecutter template for new Pytorch C++ Projects.
 
 ## Usage
 
 1. Make sure you have [Cookiecutter](https://github.com/audreyr/cookiecutter) installed. If not take a look at [its documentation](http://cookiecutter.rtfd.org/).
-2. Run `cookiecutter https://github.com/Paspartout/BoilerplatePP` in your Terminal.
+2. Run `cookiecutter https://github.com/yngtodd/cookiecutter_pytorch_cpp` in your Terminal.
 3. Your brand new C++ project should be aviable in your given repo_name.
 
 ## Built upon great projects
